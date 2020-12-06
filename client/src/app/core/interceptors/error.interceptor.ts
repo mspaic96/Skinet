@@ -4,7 +4,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { error } from 'protractor';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, delay } from 'rxjs/operators';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor
@@ -12,6 +12,8 @@ export class ErrorInterceptor implements HttpInterceptor
     constructor (private router: Router, private toastr: ToastrService) {}
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).pipe(
+            
+         
             // tslint:disable-next-line: no-shadowed-variable
             catchError( error => {
                 if (error) {
